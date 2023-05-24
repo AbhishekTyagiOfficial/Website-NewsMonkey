@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 
 export default class extends Component {
-  article = [
+  articles = [
     {
       source: { id: "espn-cric-info", name: "ESPN Cric Info" },
       author: null,
@@ -39,27 +39,39 @@ export default class extends Component {
       "This is super constructer. if we use constructure then we must use the super method."
     );
     this.state = {
-      article: this.article,
+      articles: this.articles,
     };
   }
 
   // componentDidMount() is life cycle method, it is run after render method
-  componentDidMount() {
+  async componentDidMount() {
     console.log("cdm");
+    let url =
+      "https://newsapi.org/v2/top-headlines?country=in&apiKey=de3a0b0e4ed54c36b5026c9872d7b63c";
+    let data = await fetch(url);
+    let pd = await data.json();
+    console.log(pd);
+    this.setState({ articles: pd.articles });
   }
   render() {
-    console.log("render");
+    // console.log("render");
     return (
       <div className="container my-4">
         <h3>This is our news components.</h3>
         <div className="row">
-          {this.state.article.map((element) => {
+          {this.state.articles.map((element) => {
             return (
               <div className="col-md-4" key={element.url}>
                 <NewsItem
-                  title={element.title.slice(0, 30)}
-                  description={element.description.slice(0, 70)}
-                  imageUrl={element.urlToImage}
+                  title={element.title ? element.title.slice(0, 30) : ""}
+                  description={
+                    element.description ? element.description.slice(0, 70) : ""
+                  }
+                  imageUrl={
+                    element.urlToImage
+                      ? element.urlToImage
+                      : "https://c.ndtvimg.com/2023-05/t7okl8dg_ms-dhoni-and-hardik-pandya-bcci_625x300_23_May_23.jpg?im=FaceCrop,algorithm=dnn,width=1200,height=675"
+                  }
                   newsUrl={element.url}
                 />
               </div>
