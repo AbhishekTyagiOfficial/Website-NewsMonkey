@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 import Spinner from "./Spinner";
 
-export default class extends Component {
+export class News extends Component {
   constructor() {
     super();
     console.log(
@@ -19,7 +19,7 @@ export default class extends Component {
   async componentDidMount() {
     console.log("cdm");
     this.setState({ loading: true });
-    let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=de3a0b0e4ed54c36b5026c9872d7b63c&page=1&pageSize=${this.props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&apiKey=de3a0b0e4ed54c36b5026c9872d7b63c&page=1&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     let pd = await data.json();
     console.log(pd);
@@ -32,7 +32,9 @@ export default class extends Component {
 
   handlePrevClick = async () => {
     console.log("Prev");
-    let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=de3a0b0e4ed54c36b5026c9872d7b63c&page=${
+    let url = `https://newsapi.org/v2/top-headlines?country=${
+      this.props.country
+    }&apiKey=de3a0b0e4ed54c36b5026c9872d7b63c&page=${
       this.state.page - 1
     }&pageSize=${this.props.pageSize}`;
     this.setState({ loading: true });
@@ -53,7 +55,9 @@ export default class extends Component {
         Math.ceil(this.state.totalResults / this.props.pageSize)
       )
     ) {
-      let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=de3a0b0e4ed54c36b5026c9872d7b63c&page=${
+      let url = `https://newsapi.org/v2/top-headlines?country=${
+        this.props.country
+      }&apiKey=de3a0b0e4ed54c36b5026c9872d7b63c&page=${
         this.state.page + 1
       } &pageSize=${this.props.pageSize}`;
       this.setState({ loading: true });
@@ -79,12 +83,12 @@ export default class extends Component {
             ? ""
             : this.state.articles.map((element) => {
                 return (
-                  <div className="col-md-4" key={element.url}>
+                  <div className="col-md-4 " key={element.url}>
                     <NewsItem
-                      title={element.title ? element.title.slice(0, 30) : ""}
+                      title={element.title ? element.title.slice(0, 50) : ""}
                       description={
                         element.description
-                          ? element.description.slice(0, 70)
+                          ? element.description.slice(0, 100)
                           : ""
                       }
                       imageUrl={
@@ -98,28 +102,34 @@ export default class extends Component {
                 );
               })}
         </div>
-        <div className="container my-4">
-          <div className="container d-flex justify-content-between">
-            <button
-              disabled={this.state.page <= 1}
-              className="btn btn-primary"
-              onClick={this.handlePrevClick}
-            >
-              &larr; Previous
-            </button>
-            <button
-              disabled={
-                this.state.page + 1 >
-                Math.ceil(this.state.totalResults / this.props.pageSize)
-              }
-              className="btn btn-primary"
-              onClick={this.handleNextClick}
-            >
-              Next &rarr;
-            </button>
-          </div>
+        <div className="d-flex justify-content-between my-4">
+          <button
+            disabled={this.state.page <= 1}
+            className="btn btn-primary "
+            onClick={this.handlePrevClick}
+            style={{
+              marginleft: "4rem ",
+            }}
+          >
+            &larr; Previous
+          </button>
+          <button
+            disabled={
+              this.state.page + 1 >
+              Math.ceil(this.state.totalResults / this.props.pageSize)
+            }
+            className="btn btn-primary "
+            onClick={this.handleNextClick}
+            style={{
+              marginRight: "10px",
+            }}
+          >
+            Next &rarr;
+          </button>
         </div>
       </div>
     );
   }
 }
+
+export default News;

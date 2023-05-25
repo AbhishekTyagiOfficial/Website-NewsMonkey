@@ -35,36 +35,40 @@ export default class Navbar extends Component {
                   </a>
                 </li>
 
-                <li className="nav-item dropdown">
-                  <a
-                    className="nav-link dropdown-toggle text-white"
-                    href="#"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Category
+                <li className="nav-item">
+                  <a className="nav-link text-white" href="about">
+                    Business
                   </a>
-                  <ul className="dropdown-menu text-white">
-                    <li>
-                      <a className="dropdown-item " href="#">
-                        Sports
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Local News
-                      </a>
-                    </li>
-                    {/* <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Something else here
-                      </a>
-                    </li> */}
-                  </ul>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link text-white" href="about">
+                    Entertainment
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link text-white" href="about">
+                    General
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link text-white" href="about">
+                    Health
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link text-white" href="about">
+                    Science
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link text-white" href="about">
+                    Sports
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link text-white" href="about">
+                    Technology
+                  </a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link text-white" href="about">
