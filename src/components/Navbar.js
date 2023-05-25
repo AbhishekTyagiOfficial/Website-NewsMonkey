@@ -4,9 +4,9 @@ export default class Navbar extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <nav className="navbar navbar-expand-lg bg-dark ">
           <div className="container-fluid">
-            <a className="navbar-brand" href="#">
+            <a className="navbar-brand text-white" href="news">
               Navbar
             </a>
             <button
@@ -26,51 +26,53 @@ export default class Navbar extends Component {
             >
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="#">
+                  <a
+                    className="nav-link active text-white"
+                    aria-current="page"
+                    href="news"
+                  >
                     Home
                   </a>
                 </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    Link
-                  </a>
-                </li>
+
                 <li className="nav-item dropdown">
                   <a
-                    className="nav-link dropdown-toggle"
+                    className="nav-link dropdown-toggle text-white"
                     href="#"
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    Dropdown
+                    Category
                   </a>
-                  <ul className="dropdown-menu">
+                  <ul className="dropdown-menu text-white">
                     <li>
-                      <a className="dropdown-item" href="#">
-                        Action
+                      <a className="dropdown-item " href="#">
+                        Sports
                       </a>
                     </li>
                     <li>
                       <a className="dropdown-item" href="#">
-                        Another action
+                        Local News
                       </a>
                     </li>
-                    <li>
+                    {/* <li>
                       <hr className="dropdown-divider" />
                     </li>
                     <li>
                       <a className="dropdown-item" href="#">
                         Something else here
                       </a>
-                    </li>
+                    </li> */}
                   </ul>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link disabled">Disabled</a>
+                  <a className="nav-link text-white" href="about">
+                    About
+                  </a>
                 </li>
               </ul>
-              <form className="d-flex" role="search">
+              {/* <form className="d-flex" role="search">
                 <input
                   className="form-control me-2"
                   type="search"
@@ -80,7 +82,7 @@ export default class Navbar extends Component {
                 <button className="btn btn-outline-success" type="submit">
                   Search
                 </button>
-              </form>
+              </form> */}
             </div>
           </div>
         </nav>

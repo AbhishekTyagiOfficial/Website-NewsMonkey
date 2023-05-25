@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
+import Spinner from "./Spinner";
 
 export default class extends Component {
   constructor() {
@@ -17,47 +18,63 @@ export default class extends Component {
   // componentDidMount() is life cycle method, it is run after render method
   async componentDidMount() {
     console.log("cdm");
-    let url =
-      "https://newsapi.org/v2/top-headlines?country=in&apiKey=de3a0b0e4ed54c36b5026c9872d7b63c&page=1&pageSize=20";
+    this.setState({ loading: true });
+    let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=de3a0b0e4ed54c36b5026c9872d7b63c&page=1&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     let pd = await data.json();
     console.log(pd);
-    this.setState({ articles: pd.articles, totalResults: pd.pageSize });
+    this.setState({
+      articles: pd.articles,
+      totalResults: pd.totalResults,
+      loading: false,
+    });
   }
 
   handlePrevClick = async () => {
     console.log("Prev");
     let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=de3a0b0e4ed54c36b5026c9872d7b63c&page=${
       this.state.page - 1
-    }&pageSize=20`;
+    }&pageSize=${this.props.pageSize}`;
+    this.setState({ loading: true });
     let data = await fetch(url);
     let pd = await data.json();
     console.log(pd);
     this.setState({
       page: this.state.page - 1,
       articles: pd.articles,
+      loading: false,
     });
   };
   handleNextClick = async () => {
     console.log("Next");
-    let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=de3a0b0e4ed54c36b5026c9872d7b63c&page=${
-      this.state.page + 1
-    } &pageSize=20`;
-    let data = await fetch(url);
-    let pd = await data.json();
-    console.log(pd);
-    this.setState({
-      page: this.state.page + 1,
-      articles: pd.articles,
-    });
+    if (
+      !(
+        this.state.page + 1 >
+        Math.ceil(this.state.totalResults / this.props.pageSize)
+      )
+    ) {
+      let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=de3a0b0e4ed54c36b5026c9872d7b63c&page=${
+        this.state.page + 1
+      } &pageSize=${this.props.pageSize}`;
+      this.setState({ loading: true });
+      let data = await fetch(url);
+      let pd = await data.json();
+      console.log(pd);
+      this.setState({
+        page: this.state.page + 1,
+        articles: pd.articles,
+        loading: false,
+      });
+    }
   };
 
   render() {
     // console.log("render");
     return (
       <div className="container my-4">
-        <h3>This is our news components.</h3>
-        <div className="row">
+        <h3 className="text-center">This is our news components.</h3>
+        {this.state.loading ? <Spinner /> : ""}
+        <div className="row my-5">
           {this.state.articles.map((element) => {
             return (
               <div className="col-md-4" key={element.url}>
@@ -77,17 +94,26 @@ export default class extends Component {
             );
           })}
         </div>
-        <div className="container d-flex justify-content-between">
-          <button
-            disabled={this.state.page <= 1}
-            className="btn btn-primary"
-            onClick={this.handlePrevClick}
-          >
-            &larr; Previous
-          </button>
-          <button className="btn btn-primary" onClick={this.handleNextClick}>
-            Next &rarr;
-          </button>
+        <div className="container my-4">
+          <div className="container d-flex justify-content-between">
+            <button
+              disabled={this.state.page <= 1}
+              className="btn btn-primary"
+              onClick={this.handlePrevClick}
+            >
+              &larr; Previous
+            </button>
+            <button
+              disabled={
+                this.state.page + 1 >
+                Math.ceil(this.state.totalResults / this.props.pageSize)
+              }
+              className="btn btn-primary"
+              onClick={this.handleNextClick}
+            >
+              Next &rarr;
+            </button>
+          </div>
         </div>
       </div>
     );
