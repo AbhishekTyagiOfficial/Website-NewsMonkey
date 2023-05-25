@@ -75,24 +75,28 @@ export default class extends Component {
         <h3 className="text-center">This is our news components.</h3>
         {this.state.loading ? <Spinner /> : ""}
         <div className="row my-5">
-          {this.state.articles.map((element) => {
-            return (
-              <div className="col-md-4" key={element.url}>
-                <NewsItem
-                  title={element.title ? element.title.slice(0, 30) : ""}
-                  description={
-                    element.description ? element.description.slice(0, 70) : ""
-                  }
-                  imageUrl={
-                    element.urlToImage
-                      ? element.urlToImage
-                      : "https://c.ndtvimg.com/2023-05/t7okl8dg_ms-dhoni-and-hardik-pandya-bcci_625x300_23_May_23.jpg?im=FaceCrop,algorithm=dnn,width=1200,height=675"
-                  }
-                  newsUrl={element.url}
-                />
-              </div>
-            );
-          })}
+          {this.state.loading
+            ? ""
+            : this.state.articles.map((element) => {
+                return (
+                  <div className="col-md-4" key={element.url}>
+                    <NewsItem
+                      title={element.title ? element.title.slice(0, 30) : ""}
+                      description={
+                        element.description
+                          ? element.description.slice(0, 70)
+                          : ""
+                      }
+                      imageUrl={
+                        element.urlToImage
+                          ? element.urlToImage
+                          : "https://c.ndtvimg.com/2023-05/t7okl8dg_ms-dhoni-and-hardik-pandya-bcci_625x300_23_May_23.jpg?im=FaceCrop,algorithm=dnn,width=1200,height=675"
+                      }
+                      newsUrl={element.url}
+                    />
+                  </div>
+                );
+              })}
         </div>
         <div className="container my-4">
           <div className="container d-flex justify-content-between">
