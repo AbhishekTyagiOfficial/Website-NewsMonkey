@@ -1,8 +1,20 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 import Spinner from "./Spinner";
+import PropTypes from "prop-types";
 
 export class News extends Component {
+  static defaultProps = {
+    country: "in",
+    pageSize: 6,
+    category: "general",
+  };
+  static propTypes = {
+    country: PropTypes.string,
+    pageSize: PropTypes.number,
+    category: PropTypes.string,
+  };
+
   constructor() {
     super();
     console.log(
@@ -19,7 +31,7 @@ export class News extends Component {
   async componentDidMount() {
     console.log("cdm");
     this.setState({ loading: true });
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&apiKey=de3a0b0e4ed54c36b5026c9872d7b63c&page=1&pageSize=${this.props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=de3a0b0e4ed54c36b5026c9872d7b63c&page=1&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     let pd = await data.json();
     console.log(pd);
@@ -34,6 +46,8 @@ export class News extends Component {
     console.log("Prev");
     let url = `https://newsapi.org/v2/top-headlines?country=${
       this.props.country
+    }&category=${
+      this.props.category
     }&apiKey=de3a0b0e4ed54c36b5026c9872d7b63c&page=${
       this.state.page - 1
     }&pageSize=${this.props.pageSize}`;
@@ -57,6 +71,8 @@ export class News extends Component {
     ) {
       let url = `https://newsapi.org/v2/top-headlines?country=${
         this.props.country
+      }&category=${
+        this.props.category
       }&apiKey=de3a0b0e4ed54c36b5026c9872d7b63c&page=${
         this.state.page + 1
       } &pageSize=${this.props.pageSize}`;
@@ -76,7 +92,7 @@ export class News extends Component {
     // console.log("render");
     return (
       <div className="container my-4">
-        <h3 className="text-center">This is our news components.</h3>
+        <h3 className="text-center">{this.props.heading}</h3>
         {this.state.loading ? <Spinner /> : ""}
         <div className="row my-5">
           {this.state.loading
@@ -97,6 +113,9 @@ export class News extends Component {
                           : "https://c.ndtvimg.com/2023-05/t7okl8dg_ms-dhoni-and-hardik-pandya-bcci_625x300_23_May_23.jpg?im=FaceCrop,algorithm=dnn,width=1200,height=675"
                       }
                       newsUrl={element.url}
+                      author={element.author}
+                      date={element.publishedAt}
+                      source={element.source.name}
                     />
                   </div>
                 );
