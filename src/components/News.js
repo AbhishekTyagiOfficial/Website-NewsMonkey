@@ -15,8 +15,11 @@ export class News extends Component {
     category: PropTypes.string,
   };
 
-  constructor() {
-    super();
+  capitalFirstLatter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+  constructor(props) {
+    super(props);
     console.log(
       "This is super constructer. if we use constructure then we must use the super method."
     );
@@ -25,6 +28,9 @@ export class News extends Component {
       loading: false, // using reload time
       page: 1,
     };
+    document.title = `${this.capitalFirstLatter(
+      this.props.category
+    )} - NewsMonkey`;
   }
 
   // componentDidMount() is life cycle method, it is run after render method
@@ -92,7 +98,9 @@ export class News extends Component {
     // console.log("render");
     return (
       <div className="container my-4">
-        <h3 className="text-center">{this.props.heading}</h3>
+        <h3 className="text-center">
+          NewsMokey - Top Headlines from {this.props.category}
+        </h3>
         {this.state.loading ? <Spinner /> : ""}
         <div className="row my-5">
           {this.state.loading

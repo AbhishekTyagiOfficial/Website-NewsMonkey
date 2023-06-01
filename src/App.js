@@ -19,10 +19,10 @@ export default class App extends Component {
               element={
                 <News
                   key="general" // for reload the content by uniqe id
-                  heading="Today's Top News"
+                  // heading="Today's Top News"
                   pageSize={9}
                   country="in"
-                  category="general"
+                  category="General"
                 />
               }
             ></Route>
@@ -33,9 +33,9 @@ export default class App extends Component {
                 <News
                   key="busines"
                   pageSize={9}
-                  heading="Today's Busines News"
+                  // heading="Today's Busines News"
                   country="in"
-                  category="business"
+                  category="Business"
                 />
               }
             ></Route>
@@ -44,10 +44,10 @@ export default class App extends Component {
               element={
                 <News
                   key="entertainment"
-                  heading="Today's Entertainment News"
+                  // heading="Today's Entertainment News"
                   pageSize={9}
                   country="in"
-                  category="entertainment"
+                  category="Entertainment"
                 />
               }
             ></Route>
@@ -57,10 +57,10 @@ export default class App extends Component {
               element={
                 <News
                   key="health"
-                  heading="Today's Health News"
+                  // heading="Today's Health News"
                   pageSize={9}
                   country="in"
-                  category="health"
+                  category="Health"
                 />
               }
             ></Route>
@@ -70,10 +70,10 @@ export default class App extends Component {
               element={
                 <News
                   key="science"
-                  heading="Today's Science News"
+                  // heading="Today's Science News"
                   pageSize={9}
                   country="in"
-                  category="science"
+                  category="Science"
                 />
               }
             ></Route>
@@ -83,10 +83,10 @@ export default class App extends Component {
               element={
                 <News
                   key="sports"
-                  heading="Today's Sports News"
+                  // heading="Today's Sports News"
                   pageSize={9}
                   country="in"
-                  category="sports"
+                  category="Sports"
                 />
               }
             ></Route>
@@ -96,10 +96,10 @@ export default class App extends Component {
               element={
                 <News
                   key="technology"
-                  heading="Today's Technology News"
+                  // heading="Today's Technology News"
                   pageSize={9}
                   country="in"
-                  category="technology"
+                  category="Technology"
                 />
               }
             ></Route>
