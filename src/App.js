@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
+import "./App.css";
 import Navbar from "./components/Navbar";
 import News from "./components/News";
 import About from "./components/About";
